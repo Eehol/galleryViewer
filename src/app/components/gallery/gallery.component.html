@@ -1,1 +1,34 @@
-<p>gallery works!</p>
+<!-- Header boutons -->
+<div class="header">
+  <button mat-button (click)="toggleAutoScroll()">
+    {{ autoScroll ? 'Stop scroll' : 'Auto-scroll' }}
+  </button>
+
+  <button mat-button (click)="toggleShowFavorites()">
+    {{ showOnlyFavorites ? 'Afficher tous' : 'Afficher favoris' }}
+  </button>
+</div>
+
+<!-- Galerie -->
+<div class="gallery">
+  <div *ngFor="let file of displayedFiles; let i = index" class="item">
+    <img *ngIf="file.type.startsWith('image')" [src]="file | fileUrl" (click)="toggleFullscreen(i)" />
+    <video *ngIf="file.type.startsWith('video')" [src]="file | fileUrl" controls (click)="toggleFullscreen(i)"></video>
+
+    <!-- Bouton favori miniature -->
+    <button class="fav-btn" (click)="toggleFavorite(file); $event.stopPropagation()">
+      {{ isFavorite(file) ? '★' : '☆' }}
+    </button>
+  </div>
+</div>
+
+<!-- Fullscreen overlay -->
+<div *ngIf="fullscreenIndex !== null" class="fullscreen-overlay" (click)="toggleFullscreen(null)">
+  <img *ngIf="currentFile.type.startsWith('image')" [src]="currentFile | fileUrl" />
+  <video *ngIf="currentFile.type.startsWith('video')" [src]="currentFile | fileUrl" controls autoplay></video>
+
+  <!-- Bouton favori fullscreen -->
+  <button class="fav-btn fullscreen-btn" (click)="toggleFavorite(currentFile); $event.stopPropagation()">
+    {{ isFavorite(currentFile) ? '★' : '☆' }}
+  </button>
+</div>
