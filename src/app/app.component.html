@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-raised-button (click)="openFolder()">📂 Choisir un dossier</button>
+</mat-toolbar>
+
+<div *ngIf="files.length === 0" class="empty">
+  <p>Sélectionne un dossier pour afficher la galerie.</p>
+</div>
+
+<app-gallery *ngIf="files.length > 0" [files]="files"></app-gallery>
