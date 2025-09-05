@@ -24,7 +24,7 @@ function createWindow() {
   });
 
   // Ouvre DevTools pour debug
-  win.webContents.openDevTools();
+//  win.webContents.openDevTools();
 
   // Charge l'index.html généré par Angular
   // Vérifie le chemin exact après build Angular
